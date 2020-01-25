@@ -4,14 +4,10 @@
 
 #include "LoginState.h"
 
-bool LoginState::isCommandInWindow(std::string symbol) {
-    return symbol == "new";
+
+LoginState::LoginState() {
+    str2commands["exit"] = new ExitCommand();
+    str2commands["print"] = new PrintCommand();
+    str2commands["new"] = new CreateUserCommand(this);
 }
 
-AbstCommand *LoginState::findCommand(std::string symbol) {
-    return &c;
-}
-
-void LoginState::addObserver(AbstCommand::CommandObserver *obs) {
-    c.addObserver(obs);
-}

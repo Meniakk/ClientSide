@@ -12,8 +12,11 @@
 #include "Lexer.h"
 #include "Parser.h"
 #include "Client.h"
+#include "StateStack.h"
+#include "UserHolder.h"
 
-class Model : public IModel, public AbstCommand::CommandObserver {
+
+class Model : public IModel, public ICommand::CommandObserver {
 private:
     Lexer lex;
     Parser par;
@@ -23,7 +26,7 @@ private:
     std::vector<IModel::IOObserver *> ioObservers;
 public:
 
-    void notify(AbstCommand::CommandNotify args) override;
+    void notify(ICommand::CommandNotify args) override;
 
     void proccesLine(std::string line) override;
 
@@ -33,11 +36,13 @@ public:
 
     Model(IState *currentState,std::string &ip, int port);
 
+    Model(std::string &ip, int port);
+
 private:
     class InputCallbackAdapter: public IModel::InCallback{
-        AbstCommand::CommandInputCallback *callback;
+        ICommand::CommandInputCallback *callback;
     public:
-        InputCallbackAdapter(AbstCommand::CommandInputCallback *callback);
+        InputCallbackAdapter(ICommand::CommandInputCallback *callback);
 
         void in(std::string input) override;
 
@@ -49,9 +54,9 @@ private:
 
     void notifyOutput(std::string output);
 
-    void notifyInput(AbstCommand::CommandInputCallback* callback);
+    void notifyInput(ICommand::CommandInputCallback* callback);
 
-    void notifyNewState(IState *newState);
+    void notifyNewState();
 
 };
 

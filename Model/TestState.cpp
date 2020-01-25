@@ -13,13 +13,13 @@ AbstCommand *TestState::findCommand(std::string symbol) {
     return &c1;
 }
 
-void TestState::addObserver(AbstCommand::CommandObserver *obs) {
+void TestState::addObserver(ICommand::CommandObserver *obs) {
     c.addObserver(obs);
     c1.addObserver(obs);
 }
 
 void TestState::TestCommand::doCommand(std::vector<std::string> line) {
-    AbstCommand::CommandNotify out;
+    ICommand::CommandNotify out;
     out.isExit = false;
     if (line.size() < 2) {
         out.isError = true;

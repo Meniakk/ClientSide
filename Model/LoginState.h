@@ -5,17 +5,17 @@
 #ifndef CLIENTSIDE_LOGINSTATE_H
 #define CLIENTSIDE_LOGINSTATE_H
 
-#include "IState.h"
+
+#include <unordered_map>
+#include "MapState.h"
 #include "CreateUserCommand.h"
-class LoginState : public IState{
-    CreateUserCommand c;
+#include "ExitCommand.h"
+#include "PrintCommand.h"
 
+class LoginState : public MapState {
 public:
-    bool isCommandInWindow(std::string symbol) override;
+    LoginState();
 
-    AbstCommand *findCommand(std::string symbol) override;
-
-    void addObserver(AbstCommand::CommandObserver *obs) override;
 };
 
 

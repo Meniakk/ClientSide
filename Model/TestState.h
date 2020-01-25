@@ -6,11 +6,11 @@
 #define UTEMP_TESTSTATE_H
 
 #include "IState.h"
-#include "AbstCommand.h"
+#include "ICommand.h"
 #include "TestClientCommand.h"
 
 class TestState : public IState {
-    std::vector<AbstCommand::CommandObserver*> observers;
+    std::vector<ICommand::CommandObserver*> observers;
 
     class TestCommand : public AbstCommand {
     public:
@@ -25,7 +25,7 @@ public:
 
     AbstCommand *findCommand(std::string symbol) override;
 
-    void addObserver(AbstCommand::CommandObserver *obs) override;
+    void addObserver(ICommand::CommandObserver *obs) override;
 
 };
 

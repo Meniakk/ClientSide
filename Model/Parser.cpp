@@ -4,7 +4,7 @@
 
 #include "Parser.h"
 
-AbstCommand* Parser::parse(std::vector<std::string> line, IState *currentState) {
+ICommand* Parser::parse(std::vector<std::string> line, IState *currentState) {
     if (line.empty()) {
         return nullptr;
     }

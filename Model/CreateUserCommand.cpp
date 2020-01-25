@@ -23,21 +23,22 @@ void CreateUserCommand::doCommand(std::vector<std::string> line) {
         builder.setType(getInfo());
         printOuput(enter + "what you into\n MALE/FEMALE");
         builder.setPrefSex(getInfo());
-    }catch (...){
+    } catch (...) {
         error();
         return;
     }
     User user = builder.build();
 
-    sendToServer(newUserParse(user.getAge(),user.getName(),user.getShortBio(),user.getLongBio(),user.getType(),user.getUserSex(),user.getPrefSex()));
+    sendToServer(newUserParse(user.getAge(), user.getName(), user.getShortBio(), user.getLongBio(), user.getType(),
+                              user.getUserSex(), user.getPrefSex()));
     std::string answer = getFromServer();
-    if ( answer == "0"){
+    if (answer == "0") {
         error();
         return;
-    } else{
+    } else {
         try {
             UserHolder::getInstance().setUser(std::stoi(answer));
-        }catch (...){
+        } catch (...) {
             error();
             return;
         }
@@ -46,11 +47,12 @@ void CreateUserCommand::doCommand(std::vector<std::string> line) {
     CommandNotify cn;
     cn.newState = true;
     notify(cn);
+    StateStack::getInstance().push(nextState);
 }
 
 std::string CreateUserCommand::getInfo() {
     std::string out;
-    while (true){
+    while (true) {
         //TODO: check there is not ileagle chars
         out = getLine();
         break;
@@ -58,4 +60,6 @@ std::string CreateUserCommand::getInfo() {
     return out;
 
 }
+
+CreateUserCommand::CreateUserCommand(IState *nextState) : nextState(nextState) {}
 

@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <string>
 
-#include "IState.h"
+#include "MapState.h"
 #include "LoveCommand.h"
 #include "LovedCommand.h"
 #include "getCommand.h"
@@ -18,19 +18,9 @@
 #include "PrintCommand.h"
 #include "CreateUserCommand.h"
 
-class MainState : public IState {
-private:
-    std::unordered_map<std::string, AbstCommand *> str2commands;
+class MainState : public MapState {
 public:
     MainState();
-
-    bool isCommandInWindow(std::string symbol) override;
-
-    AbstCommand *findCommand(std::string symbol) override;
-
-    void addObserver(AbstCommand::CommandObserver *obs) override;
-
-    virtual ~MainState();
 };
 
 
