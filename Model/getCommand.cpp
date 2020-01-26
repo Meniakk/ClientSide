@@ -7,6 +7,10 @@
 void getCommand::doCommand(std::vector<std::string> line) {
     int k;
     try {
+        if (line.size() <2){
+            error();
+            return;
+        }
         k = std::stoi(line[1]);
     } catch (...) {
         error();

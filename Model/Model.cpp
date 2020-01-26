@@ -112,6 +112,7 @@ Model::Model()   {
 
 void Model::notifyNewState() {
     this->currentState = StateStack::getInstance().pop();
+    currentState->addObserver(this);
 }
 
 

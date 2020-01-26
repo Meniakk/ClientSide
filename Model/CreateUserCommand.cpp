@@ -44,16 +44,16 @@ void CreateUserCommand::doCommand(std::vector<std::string> line) {
         }
 
     }
+
+    StateStack::getInstance().push(nextState);
     CommandNotify cn;
     cn.newState = true;
     notify(cn);
-    StateStack::getInstance().push(nextState);
 }
 
 std::string CreateUserCommand::getInfo() {
     std::string out;
     while (true) {
-        //TODO: check there is not ileagle chars
         out = getLine();
         break;
     }

@@ -8,6 +8,10 @@
 void LoveCommand::doCommand(std::vector<std::string> line) {
     int id2;
     try {
+        if (line.size() <2){
+            error();
+            return;
+        }
         id2 = std::stoi(line[1]);
     } catch (...) {
         error();

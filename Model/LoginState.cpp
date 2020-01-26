@@ -8,6 +8,6 @@
 LoginState::LoginState() {
     str2commands["exit"] = new ExitCommand();
     str2commands["print"] = new PrintCommand();
-    str2commands["new"] = new CreateUserCommand(this);
+    str2commands["new"] = new CreateUserCommand(new MainState());
 }
 

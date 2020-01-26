@@ -11,7 +11,7 @@ int main() {
         LoginState s;
         std::string r = "192.168.239.1";
         int port = 1234;
-        Client con(r,-1);
+        Client con(r,port);
         Model m(&s);
         m.addConObserver(&con);
         ConsolView v;

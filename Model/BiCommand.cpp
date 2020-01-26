@@ -8,6 +8,10 @@
 void BiCommand::doCommand(std::vector<std::string> line) {
     std::string tag;
     try {
+        if (line.size() <2){
+            error();
+            return;
+        }
         tag = line[1];
     } catch (...) {
         error();

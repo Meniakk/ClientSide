@@ -8,6 +8,7 @@
 
 #include <unordered_map>
 #include "MapState.h"
+#include "MainState.h"
 #include "CreateUserCommand.h"
 #include "ExitCommand.h"
 #include "PrintCommand.h"
