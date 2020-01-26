@@ -10,6 +10,14 @@
 
 class IView {
 public:
+    class ViewObserver{
+    public:
+        virtual void newLineEvent(std::string input) = 0;
+    };
+
+    virtual void open() = 0;
+
+    virtual void addObserver(ViewObserver* obs) = 0;
 
     virtual bool getLine(std::string &toline) = 0;
 

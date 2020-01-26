@@ -22,15 +22,10 @@
 class Controller : public IController {
 
 private:
-    IView *view;
-    IModel *model;
-    IState *currentState;
-    std::queue<std::string> inputs;
     bool run;
 public:
     Controller(IView *view, IModel *model);
 
-    void sendServerCommand(std::string command) override;
 
     ~Controller() override;
 

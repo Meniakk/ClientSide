@@ -40,10 +40,18 @@ public:
     class ModelObserver : public IOObserver, public EObserver {
     };
 
+    class ConnectionObserver {
+    public:
+        virtual void sendingEvent(std::string out) = 0;
+
+        virtual void inputEvent(InCallback *callback) = 0;
+    };
 
     virtual void addEObserver(EObserver *observer) = 0;
 
     virtual void addIOObserver(IOObserver *observer) = 0;
+
+    virtual void addConObserver(ConnectionObserver *observer) = 0;
 
     virtual void proccesLine(std::string line) = 0;
 

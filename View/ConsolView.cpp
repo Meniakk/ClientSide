@@ -12,3 +12,12 @@ bool ConsolView::getLine(std::string& toline) {
 void ConsolView::showOutput(std::string output) {
     std::cout << output;
 }
+
+
+void ConsolView::open() {
+
+}
+
+void ConsolView::addObserver(IView::ViewObserver *obs) {
+    observers.push_back(obs);
+}

@@ -26,14 +26,16 @@ std::string isUserInDataBase(int id) {
 }
 
 std::string newUserParse(int age,
-        std::string name,
-        std::string shortBio,
-        std::string longBio,
-        std::string userType,
-        std::string userGender,
-             std::string intoGender) {
-    return "new_user " + std::to_string(age) + ", "+name+", " + shortBio + ", " + longBio + ", " + userType + ", " + userGender + ", " + intoGender;
+                         std::string name,
+                         std::string shortBio,
+                         std::string longBio,
+                         std::string userType,
+                         std::string userGender,
+                         std::string intoGender) {
+    return "new_user " + std::to_string(age) + ", " + name + ", " + shortBio + ", " + longBio + ", " + userType + ", " +
+           userGender + ", " + intoGender;
 }
+
 Client::Client(std::string &ip, int port) {
     if (port == -1) return; //TODO: del this line
 
@@ -107,4 +109,8 @@ std::string Client::getLine() {
     line = line.substr(line.find_first_of(LINE_END) + 1, line.size() - 1);
     return out;
 
+}
+
+void Client::inputEvent(IModel::InCallback *callback) {
+    callback->in(getLine());
 }

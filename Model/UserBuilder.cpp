@@ -41,35 +41,3 @@ void UserBuilder::setPrefSex(const std::string &prefSex) {
     UserBuilder::prefSex = prefSex;
 }
 
-int UserBuilder::getId() const {
-    return id;
-}
-
-int UserBuilder::getAge() const {
-    return age;
-}
-
-const std::string &UserBuilder::getName() const {
-    return name;
-}
-
-const std::string &UserBuilder::getShortBio() const {
-    return shortBio;
-}
-
-const std::string &UserBuilder::getLongBio() const {
-    return longBio;
-}
-
-const std::string &UserBuilder::getType() const {
-    return type;
-}
-
-const std::string &UserBuilder::getUserSex() const {
-    return userSex;
-}
-
-const std::string &UserBuilder::getPrefSex() const {
-    return prefSex;
-}
-

@@ -19,21 +19,7 @@ class UserBuilder {
     std::string userSex;
     std::string prefSex;
 public:
-    int getId() const;
 
-    int getAge() const;
-
-    const std::string &getName() const;
-
-    const std::string &getShortBio() const;
-
-    const std::string &getLongBio() const;
-
-    const std::string &getType() const;
-
-    const std::string &getUserSex() const;
-
-    const std::string &getPrefSex() const;
 
     User build();
 

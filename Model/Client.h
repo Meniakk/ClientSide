@@ -17,7 +17,7 @@
 
 
 #include "Spliter.h"
-
+#include "IModel.h"
 
 #include <iostream>
 
@@ -35,12 +35,14 @@ std::string isUserInDataBase(int id);
 std::string newUserParse(int age,std::string name, std::string shortBio, std::string longBio, std::string userType, std::string userGender, std::string intoGender);
 
 
-class Client : public Spliter {
+class Client : public Spliter, public IModel::ConnectionObserver {
     int sockfd;
     std::string line;
 
 
 public:
+
+
     /**
      * connect to the server with the given ip and port
      * @param ip - the given ip
@@ -52,8 +54,12 @@ public:
      * send a given string to the server
      * @param msg - the given string
      */
-    void sendingEvent(std::string msg);
+    void sendingEvent(std::string msg) override;
 
+private:
+    void inputEvent(IModel::InCallback *callback) override;
+
+public:
     /**
      * get the socket the client using
      * @return the socket the client using

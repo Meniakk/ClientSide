@@ -4,13 +4,16 @@
 #include "View/ConsolView.h"
 #include "Model/Model.h"
 #include "Model/LoginState.h"
+#include "Model/Client.h"
 
 int main() {
     try {
         LoginState s;
         std::string r = "192.168.239.1";
         int port = 1234;
-        Model m(&s, r, -1);
+        Client con(r,-1);
+        Model m(&s);
+        m.addConObserver(&con);
         ConsolView v;
         Controller c(&v, &m);
     } catch (char const *e) {

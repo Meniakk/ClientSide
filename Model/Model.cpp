@@ -30,6 +30,21 @@ void Model::notifyInput(ICommand::CommandInputCallback *callback) {
     }
 }
 
+
+void Model::notifyConInput(ICommand::CommandInputCallback *callback) {
+    InputCallbackAdapter adapter(callback);
+    for (ConnectionObserver *obs: conObservers) {
+        obs->inputEvent(&adapter);
+    }
+}
+
+void Model::notifySend(std::string output) {
+    for (ConnectionObserver *obs: conObservers) {
+        obs->sendingEvent(output);
+    }
+}
+
+
 void Model::proccesLine(std::string line) {
     std::vector<std::string> tokens = this->lex.lexLine(line);
     ICommand *command = this->par.parse(tokens, currentState);
@@ -66,19 +81,19 @@ void Model::notify(ICommand::CommandNotify args) {
     }
 
     if (args.serverCallback != nullptr) {
-        args.serverCallback->setInput(client.getLine());
+        notifyConInput(args.serverCallback);
     }
 
     if (!args.toServer.empty()) {
-        client.sendingEvent(args.toServer);
+        notifySend(args.toServer);
     }
-    if (args.newState){
+    if (args.newState) {
         notifyNewState();
     }
 
 }
 
-Model::Model(IState *currentState, std::string &ip, int port) : currentState(currentState), client(ip, port) {
+Model::Model(IState *currentState) : currentState(currentState) {
     currentState->addObserver(this);
 }
 
@@ -91,10 +106,17 @@ void Model::InputCallbackAdapter::in(std::string input) {
 Model::InputCallbackAdapter::InputCallbackAdapter(ICommand::CommandInputCallback *callback) : callback(callback) {}
 
 
-Model::Model(std::string &ip, int port) : client(ip, port) {
+Model::Model()   {
     this->currentState = StateStack::getInstance().pop();
 }
 
 void Model::notifyNewState() {
     this->currentState = StateStack::getInstance().pop();
 }
+
+
+void Model::addConObserver(IModel::ConnectionObserver *observer) {
+    this->conObservers.push_back(observer);
+}
+
+

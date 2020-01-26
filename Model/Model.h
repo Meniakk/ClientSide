@@ -20,10 +20,10 @@ class Model : public IModel, public ICommand::CommandObserver {
 private:
     Lexer lex;
     Parser par;
-    Client client;
     IState *currentState;
     std::vector<IModel::EObserver *> eObservers;
     std::vector<IModel::IOObserver *> ioObservers;
+    std::vector<IModel::ConnectionObserver *> conObservers;
 public:
 
     void notify(ICommand::CommandNotify args) override;
@@ -34,9 +34,11 @@ public:
 
     void addIOObserver(IOObserver *observer) override;
 
-    Model(IState *currentState,std::string &ip, int port);
+    Model(IState *currentState);
 
-    Model(std::string &ip, int port);
+    Model();
+
+    void addConObserver(ConnectionObserver *observer) override;
 
 private:
     class InputCallbackAdapter: public IModel::InCallback{
@@ -55,6 +57,10 @@ private:
     void notifyOutput(std::string output);
 
     void notifyInput(ICommand::CommandInputCallback* callback);
+
+    void notifyConInput(ICommand::CommandInputCallback* callback);
+
+    void notifySend(std::string output);
 
     void notifyNewState();
 

@@ -9,13 +9,12 @@ void Controller::exitEvent() {
     this->stop();
 }
 
-void Controller::sendServerCommand(std::string command) {
-
-}
 
 Controller::~Controller() {}
 
-Controller::Controller(IView *view, IModel *model) : view(view), model(model), run(true) {
+Controller::Controller(IView *view, IModel *model) : run(true) {
+    this->model = model;
+    this->view = view;
     this->run = true;
     std::string line;
     int lineCounter = 0;

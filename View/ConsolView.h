@@ -8,11 +8,17 @@
 #include "IView.h"
 #include <iostream>
 #include <string>
+#include <vector>
 class ConsolView: public IView {
+    std::vector<IView::ViewObserver*> observers;
 public:
     bool getLine(std::string& toline) override;
 
     void showOutput(std::string output) override;
+
+    void open() override;
+
+    void addObserver(ViewObserver *obs) override;
 
 };
 

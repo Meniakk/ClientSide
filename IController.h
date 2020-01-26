@@ -11,9 +11,11 @@
 #include "Model/IModel.h"
 
 class IController : public IModel::ModelObserver {
-public:
+protected:
+    IView *view;
+    IModel *model;
 
-    virtual void sendServerCommand(std::string command) = 0;
+public:
 
     virtual void stop() = 0;
 
